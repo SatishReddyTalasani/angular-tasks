@@ -1,0 +1,72 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "Invoice_Number": 41122,
+      "Invoice_Date": "2022-03-28",
+      "Received_Name": "T SATISH REDDY",
+      "Address": "hyd",
+      "S_No": 1,
+      "Item": "Realme",
+      "Quantity": 3,
+      "Price": "10000",
+      "Total": 30000,
+      "CGST": 10,
+      "SGST": 5,
+      "Total_Tax": 4500,
+      "Net_Total": 34500
+    },
+    {
+      "Invoice_Number": 90664,
+      "Invoice_Date": "2022-03-29",
+      "Received_Name": "Ache Rajinikanth",
+      "Address": "hyd",
+      "S_No": 2,
+      "Item": "Vivo",
+      "Quantity": 4,
+      "Price": "15000",
+      "Total": 60000,
+      "CGST": 10,
+      "SGST": 5,
+      "Total_Tax": 9000,
+      "Net_Total": 69000,
+      "id": 3
+    },
+    {
+      "Invoice_Number": 19317,
+      "Invoice_Date": "2022-03-29",
+      "Received_Name": "Vaka Naresh",
+      "Address": "Amalapuram",
+      "S_No": 3,
+      "Item": "Samsung",
+      "Quantity": 3,
+      "Price": "12000",
+      "Total": 36000,
+      "CGST": 10,
+      "SGST": 5,
+      "Total_Tax": 5400,
+      "Net_Total": 41400,
+      "id": 4
+    },
+    {
+      "Invoice_Number": 84088,
+      "Invoice_Date": "2022-03-31",
+      "Received_Name": "Dasari Narasimharao",
+      "Address": "Vijayawada",
+      "S_No": 4,
+      "Item": "Redmi",
+      "Quantity": 4,
+      "Price": "10000",
+      "Total": 40000,
+      "CGST": 10,
+      "SGST": 5,
+      "Total_Tax": 6000,
+      "Net_Total": 46000,
+      "id": 5
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
