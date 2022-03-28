@@ -10,7 +10,6 @@ import { ProductOrderServiceService } from '../product-order-service.service';
 })
 export class ProductOrderComponent implements OnInit {
 
-  showUpdate !:boolean
   orderDetails !:FormGroup;
   orderData !: any;
   productObj:Product= new Product();
@@ -102,7 +101,7 @@ export class ProductOrderComponent implements OnInit {
   }
 
   updateOrder(){
-    //this.productObj.id=this.orderDetails.value.id;
+ 
     this.productObj.Invoice_Number=this.orderDetails.value.Invoice_Number;
     this.productObj.Invoice_Date=this.orderDetails.value.Invoice_Date;
     this.productObj.Received_Name=this.orderDetails.value.Received_Name;
