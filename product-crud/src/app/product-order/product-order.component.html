@@ -118,6 +118,8 @@
                 <option value="Realme">Realme</option>
                 <option value="Samsung">Samsung</option>
                 <option value="Vivo">Vivo</option>
+                <option value="Nokia">Nokia</option>
+                <option value="Oppo">Oppo</option>
               </select>
             </div>
             <div class="form-group">
@@ -179,21 +181,21 @@
               <label for="Invoice_Date">Invoice_Date</label>
               <input type="date" formControlName="Invoice_Date" class="form-control" id="Invoice_Date"
                 aria-describedby="Invoice_Date">
-                <div
+              <div
                 *ngIf="orderDetails.controls.Invoice_Date.invalid && (orderDetails.controls.Invoice_Date.dirty || orderDetails.controls.Invoice_Date.touched)"
                 class="error">
                 <div *ngIf="orderDetails.controls.Invoice_Date.hasError('required')" class="text-danger">Invoice_Date is
                   required
                 </div>
 
-              </div>  
+              </div>
             </div>
 
             <div class="form-group">
               <label for="Received_Name">Received_Name</label>
               <input type="text" formControlName="Received_Name" class="form-control" id="Received_Name"
                 aria-describedby="Received_Name">
-                <div
+              <div
                 *ngIf="orderDetails.controls.Received_Name.invalid && (orderDetails.controls.Received_Name.dirty || orderDetails.controls.Received_Name.touched)"
                 class="error">
 
@@ -205,7 +207,7 @@
                   is required
                 </div>
 
-              </div>  
+              </div>
             </div>
 
             <div class="form-group">
@@ -227,6 +229,8 @@
                 <option value="Realme">Realme</option>
                 <option value="Samsung">Samsung</option>
                 <option value="Vivo">Vivo</option>
+                <option value="Nokia">Nokia</option>
+                <option value="Oppo">Oppo</option>
               </select>
             </div>
             <div class="form-group">
