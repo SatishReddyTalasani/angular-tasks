@@ -1,22 +1,6 @@
 {
   "posts": [
     {
-      "id": 2,
-      "Invoice_Number": 41122,
-      "Invoice_Date": "2022-03-28",
-      "Received_Name": "T SATISH REDDY",
-      "Address": "hyd",
-      "S_No": 1,
-      "Item": "Realme",
-      "Quantity": 3,
-      "Price": "10000",
-      "Total": 30000,
-      "CGST": 10,
-      "SGST": 5,
-      "Total_Tax": 4500,
-      "Net_Total": 34500
-    },
-    {
       "id": 3,
       "Invoice_Number": 90664,
       "Invoice_Date": "2022-03-29",
@@ -97,20 +81,36 @@
       "Net_Total": 36000
     },
     {
-      "Invoice_Number": 43238,
-      "Invoice_Date": "2022-03-17",
+      "Invoice_Number": 6393,
+      "Invoice_Date": "2022-03-23",
       "Received_Name": "SravanKumar",
-      "Address": "Huzurabad",
+      "Address": "nalgonda",
+      "S_No": 7,
+      "Item": "Nokia",
+      "Quantity": 2,
+      "Price": "10000",
+      "Total": 20000,
+      "CGST": 10,
+      "SGST": 5,
+      "Total_Tax": 3000,
+      "Net_Total": 23000,
+      "id": 9
+    },
+    {
+      "Invoice_Number": 10316,
+      "Invoice_Date": "2022-03-10",
+      "Received_Name": "T SATISH REDDY",
+      "Address": "hyd",
       "S_No": 7,
       "Item": "Realme",
       "Quantity": 2,
-      "Price": "14000",
-      "Total": 28000,
+      "Price": "10000",
+      "Total": 20000,
       "CGST": 10,
-      "SGST": 7,
-      "Total_Tax": 4760,
-      "Net_Total": 32760,
-      "id": 8
+      "SGST": 5,
+      "Total_Tax": 3000,
+      "Net_Total": 23000,
+      "id": 10
     }
   ],
   "comments": [],

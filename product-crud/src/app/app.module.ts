@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { ProductOrderComponent } from './product-order/product-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { PrintOrderComponent } from './print-order/print-order.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProductOrderComponent
+    ProductOrderComponent,
+    PrintOrderComponent
   ],
   imports: [
     BrowserModule,

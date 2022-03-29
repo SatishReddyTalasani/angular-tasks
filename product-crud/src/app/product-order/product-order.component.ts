@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl ,FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from '../model/product.model';
 import { ProductOrderServiceService } from '../product-order-service.service';
 
@@ -10,81 +11,88 @@ import { ProductOrderServiceService } from '../product-order-service.service';
 })
 export class ProductOrderComponent implements OnInit {
 
-  orderDetails !:FormGroup;
+  orderDetails !: FormGroup;
   orderData !: any;
-  productObj:Product= new Product();
+  productObj: Product = new Product();
+  Total!:number;
 
-  constructor(private formBuilder :FormBuilder,private service :ProductOrderServiceService) { }
+  constructor(private _router:Router,private formBuilder: FormBuilder, private service: ProductOrderServiceService) { }
 
   ngOnInit(): void {
 
-    this.orderDetails=this.formBuilder.group({
-      Invoice_Number:[''],
-      Invoice_Date :['',Validators.required],
-      Received_Name:['',[Validators.required,Validators.pattern("[a-zA-Z0-9 ]+")]],
-      Address :[''],
-      S_No : [''],
-      Item : [''],
-      Quantity : [''],
-      Price :[''],
-      Total :[''],
-      CGST:[''],
-      SGST:[''],
-      Total_Tax:[''],
-      Net_Total:['']
+    
+    this.orderDetails = this.formBuilder.group({
+      Invoice_Number: [''],
+      Invoice_Date: ['', Validators.required],
+      Received_Name: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9 ]+")]],
+      Address: ['', Validators.required],
+      S_No: ['' ],
+      Item: [''],
+      Quantity: ['', Validators.required],
+      Price: ['', Validators.required],
+      Total: [''],
+      CGST: ['', Validators.required],
+      SGST: ['', Validators.required],
+      Total_Tax: [''],
+      Net_Total: ['']
 
-  
-  
+
+
     });
-
+    
     this.getAllOrders();
   }
 
- 
-  addOrder(){
-    this.productObj.id=this.orderDetails.value.id;
-    this.productObj.Invoice_Number=Math.floor((Math.random() * 100000) + 1);
-    this.productObj.Invoice_Date=this.orderDetails.value.Invoice_Date;
-    this.productObj.Received_Name=this.orderDetails.value.Received_Name;
-    this.productObj.Address=this.orderDetails.value.Address;
-    this.productObj.S_No=this.orderDetails.value.S_No;
-    this.productObj.Item=this.orderDetails.value.Item;
-    this.productObj.Quantity=this.orderDetails.value.Quantity;
-    this.productObj.Price=this.orderDetails.value.Price;
-    this.productObj.Total= this.productObj.Quantity* this.productObj.Price;
-    this.productObj.CGST=this.orderDetails.value.CGST;
-    this.productObj.SGST=this.orderDetails.value.SGST;
-    this.productObj.Total_Tax= ((this.productObj.CGST+this.productObj.SGST)*this.productObj.Total)/100;
-    this.productObj.Net_Total=this.productObj.Total_Tax + this.productObj.Total;
+  onSelect(x : any){
+     this._router.navigate(['/print',x.id]);
+  }
+getTotal(){
+  this.orderDetails.controls["Total"].setValue(this.orderDetails.value.Quantity * this.orderDetails.value.Price);
+}
+  addOrder() {
+    this.productObj.id = this.orderDetails.value.id;
+    this.productObj.Invoice_Number = Math.floor((Math.random() * 100000) + 1);
+    this.productObj.Invoice_Date = this.orderDetails.value.Invoice_Date;
+    this.productObj.Received_Name = this.orderDetails.value.Received_Name;
+    this.productObj.Address = this.orderDetails.value.Address;
+    this.productObj.S_No = this.orderDetails.value.S_No;
+    this.productObj.Item = this.orderDetails.value.Item;
+    this.productObj.Quantity = this.orderDetails.value.Quantity;
+    this.productObj.Price = this.orderDetails.value.Price;
+    this.productObj.Total = this.productObj.Price*this.productObj.Quantity;
+    this.productObj.CGST = this.orderDetails.value.CGST;
+    this.productObj.SGST = this.orderDetails.value.SGST;
+    this.productObj.Total_Tax = ((this.productObj.CGST + this.productObj.SGST) * this.productObj.Total) / 100;
+    this.productObj.Net_Total = this.productObj.Total_Tax + this.productObj.Total;
 
-    this.service.postOrder(this.productObj).subscribe((res)=>{
+    this.service.postOrder(this.productObj).subscribe((res) => {
       console.log(res);
       alert("order added succesfully")
-      let ref =document.getElementById("cancel");
+      let ref = document.getElementById("cancel");
       ref?.click();
       this.orderDetails.reset();
       this.getAllOrders();
     },
-      err =>{
+      err => {
         alert("something went wrong");
 
       });
   }
 
-  getAllOrders(){
-    this.service.getOrder().subscribe((res) =>{ this.orderData=res;})
+  getAllOrders() {
+    this.service.getOrder().subscribe((res) => { this.orderData = res; })
   }
 
-  deleteOrder(data:Product){
-    this.service.deleteOrder(data.id).subscribe((res) =>{
+  deleteOrder(data: Product) {
+    this.service.deleteOrder(data.id).subscribe((res) => {
       alert("record deleted successfully!");
       this.getAllOrders();
-  });
+    });
 
   }
 
-  onEdit(data:Product){
-    this.productObj.id=data.id;
+  onEdit(data: Product) {
+    this.productObj.id = data.id;
     this.orderDetails.controls["Invoice_Number"].setValue(data.Invoice_Number);
     this.orderDetails.controls["Invoice_Date"].setValue(data.Invoice_Date);
     this.orderDetails.controls["Received_Name"].setValue(data.Received_Name);
@@ -100,34 +108,34 @@ export class ProductOrderComponent implements OnInit {
     this.orderDetails.controls["Net_Total"].setValue(data.Net_Total);
   }
 
-  updateOrder(){
- 
-    this.productObj.Invoice_Number=this.orderDetails.value.Invoice_Number;
-    this.productObj.Invoice_Date=this.orderDetails.value.Invoice_Date;
-    this.productObj.Received_Name=this.orderDetails.value.Received_Name;
-    this.productObj.Address=this.orderDetails.value.Address;
-    this.productObj.S_No=this.orderDetails.value.S_No;
-    this.productObj.Item=this.orderDetails.value.Item;
-    this.productObj.Quantity=this.orderDetails.value.Quantity;
-    this.productObj.Price=this.orderDetails.value.Price;
-    this.productObj.Total= this.productObj.Quantity* this.productObj.Price;
-    this.productObj.CGST=this.orderDetails.value.CGST;
-    this.productObj.SGST=this.orderDetails.value.SGST;
-    this.productObj.Total_Tax= ((this.productObj.CGST+this.productObj.SGST)*this.productObj.Total)/100;
-    this.productObj.Net_Total=this.productObj.Total_Tax + this.productObj.Total;
+  updateOrder() {
 
-    this.service.UpdateOrder(this.productObj,this.productObj.id).subscribe((res) =>{
+    this.productObj.Invoice_Number = this.orderDetails.value.Invoice_Number;
+    this.productObj.Invoice_Date = this.orderDetails.value.Invoice_Date;
+    this.productObj.Received_Name = this.orderDetails.value.Received_Name;
+    this.productObj.Address = this.orderDetails.value.Address;
+    this.productObj.S_No = this.orderDetails.value.S_No;
+    this.productObj.Item = this.orderDetails.value.Item;
+    this.productObj.Quantity = this.orderDetails.value.Quantity;
+    this.productObj.Price = this.orderDetails.value.Price;
+    this.productObj.Total = this.productObj.Quantity * this.productObj.Price;
+    this.productObj.CGST = this.orderDetails.value.CGST;
+    this.productObj.SGST = this.orderDetails.value.SGST;
+    this.productObj.Total_Tax = ((this.productObj.CGST + this.productObj.SGST) * this.productObj.Total) / 100;
+    this.productObj.Net_Total = this.productObj.Total_Tax + this.productObj.Total;
+
+    this.service.UpdateOrder(this.productObj, this.productObj.id).subscribe((res) => {
       alert("record updated successfully!");
       this.orderDetails.reset();
       this.getAllOrders();
     },
-      err =>{
+      err => {
         alert("something went wrong");
 
       });
   }
 
- 
-  
- 
+
+
+
 }

@@ -15,6 +15,22 @@
       "Total_Tax": 1500,
       "Net_Total": 11500,
       "id": 1
+    },
+    {
+      "Invoice_Number": 31072,
+      "Invoice_Date": "2022-03-10",
+      "Received_Name": "Ache Rajinikanth",
+      "Address": "nalgonda",
+      "S_No": 1,
+      "Item": "Realme",
+      "Quantity": 3,
+      "Price": "15000",
+      "Total": 45000,
+      "CGST": 10,
+      "SGST": 7,
+      "Total_Tax": 7650,
+      "Net_Total": 52650,
+      "id": 2
     }
   ],
   "comments": [],

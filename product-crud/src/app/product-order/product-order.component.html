@@ -48,6 +48,8 @@
           <button (click)="onEdit(row)" class="btn btn-info" data-bs-toggle="modal"
             data-bs-target="#updateOrder">Edit</button>
           <button class="btn btn-danger mx-3" (click)="deleteOrder(row)">Delete</button>
+         <button (click)="onSelect(row)" class="btn btn-primary" routerLink="/print">View</button>
+
         </td>
       </tr>
     </tbody>
@@ -103,11 +105,30 @@
               <label for="Address">Address</label>
               <input type="String" formControlName="Address" class="form-control" id="Address"
                 aria-describedby="Address">
+              <div *ngIf="orderDetails.controls.Address.invalid && (orderDetails.controls.Address.dirty || orderDetails.controls.Address.touched)"
+                class="error">
+              <div *ngIf="orderDetails.controls.Address.hasError('required')" class="text-danger">Address is
+                  required
+              </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="exampleInputSNo">S No</label>
-              <input type="Number" formControlName="S_No" class="form-control" id="SNo" aria-describedby="SNo">
+              <input type="Number"  formControlName="S_No" class="form-control" id="SNo" aria-describedby="SNo">
+              <div
+                *ngIf="orderDetails.controls.S_No.invalid && (orderDetails.controls.S_No.dirty || orderDetails.controls.S_No.touched)"
+                class="error">
+
+                <div *ngIf="orderDetails.controls.S_No.hasError('pattern')" class="text-danger">S_No
+                  must Be greater than 0
+                  </div>
+
+                <div *ngIf="orderDetails.controls.S_No.hasError('required')" class="text-danger">S_No
+                  is required
+                </div>
+              </div>  
+
             </div>
 
             <div mdbDropdown class="dropdown">
@@ -131,6 +152,18 @@
               <label for="examplePrice">Price</label>
               <input type="text" formControlName="Price" class="form-control" id="price" aria-describedby="price"
                 placeholder="enter price">
+              <div *ngIf="orderDetails.controls.Price.invalid && (orderDetails.controls.Price.dirty || orderDetails.controls.Price.touched)"
+                class="error">
+             <div *ngIf="orderDetails.controls.Price.hasError('required')" class="text-danger">Price is
+                  required
+              </div>
+              </div>  
+            </div>
+
+            <div class="form-group">
+              <label for="CGST">Total</label>
+              <input type="number"  formControlName="Total" class="form-control" id="Total" aria-describedby="Total"
+                placeholder="Total">{{getTotal()}}
             </div>
 
             <div class="form-group">
