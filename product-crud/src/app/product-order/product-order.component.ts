@@ -15,6 +15,10 @@ export class ProductOrderComponent implements OnInit {
   orderData !: any;
   productObj: Product = new Product();
   Total!:number;
+  defaultQuantity:number=1;
+  defaultCGST:number=5;
+  defaultSGST:number=5;
+  options :String[]=["Redmi","Realme","Samsung","Nokia","Vivo","Oppo"];
 
   constructor(private _router:Router,private formBuilder: FormBuilder, private service: ProductOrderServiceService) { }
 
@@ -27,12 +31,12 @@ export class ProductOrderComponent implements OnInit {
       Received_Name: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9 ]+")]],
       Address: ['', Validators.required],
       S_No: ['' ],
-      Item: [''],
+      Item: ['', Validators.required],
       Quantity: ['', Validators.required],
       Price: ['', Validators.required],
       Total: [''],
-      CGST: ['', Validators.required],
-      SGST: ['', Validators.required],
+      CGST: [''],
+      SGST: [''],
       Total_Tax: [''],
       Net_Total: ['']
 
@@ -84,6 +88,7 @@ getTotal(){
   }
 
   deleteOrder(data: Product) {
+    confirm("do you want to delete this order "+data.Invoice_Number+" ?")
     this.service.deleteOrder(data.id).subscribe((res) => {
       alert("record deleted successfully!");
       this.getAllOrders();

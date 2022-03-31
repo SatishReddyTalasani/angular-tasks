@@ -17,7 +17,7 @@
         <th scope="col">Invoice_Date</th>
         <th scope="col">Received_Name</th>
         <th scope="col">Adress</th>
-        <th scope="col">S_No</th>
+        <!-- <th scope="col">S_No</th>
         <th scope="col">Item</th>
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
@@ -25,7 +25,7 @@
         <th scope="col">CGST</th>
         <th scope="col">SGST</th>
         <th scope="col">Total_Tax</th>
-        <th scope="col">Net_Total</th>
+        <th scope="col">Net_Total</th> -->
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -35,7 +35,7 @@
         <td>{{row.Invoice_Date}}</td>
         <td>{{row.Received_Name}}</td>
         <td>{{row.Address}}</td>
-        <td>{{row.S_No}}</td>
+        <!-- <td>{{row.S_No}}</td>
         <td>{{row.Item}}</td>
         <td>{{row.Quantity}}</td>
         <td>{{row.Price}}</td>
@@ -43,12 +43,12 @@
         <td>{{row.CGST}}</td>
         <td>{{row.SGST}}</td>
         <td>{{row.Total_Tax}}</td>
-        <td>{{row.Net_Total}}</td>
+        <td>{{row.Net_Total}}</td> -->
         <td>
           <button (click)="onEdit(row)" class="btn btn-info" data-bs-toggle="modal"
             data-bs-target="#updateOrder">Edit</button>
           <button class="btn btn-danger mx-3" (click)="deleteOrder(row)">Delete</button>
-         <button (click)="onSelect(row)" class="btn btn-primary" routerLink="/print">View</button>
+          <button (click)="onSelect(row)" class="btn btn-primary" routerLink="/print">View</button>
 
         </td>
       </tr>
@@ -105,76 +105,87 @@
               <label for="Address">Address</label>
               <input type="String" formControlName="Address" class="form-control" id="Address"
                 aria-describedby="Address">
-              <div *ngIf="orderDetails.controls.Address.invalid && (orderDetails.controls.Address.dirty || orderDetails.controls.Address.touched)"
+              <div
+                *ngIf="orderDetails.controls.Address.invalid && (orderDetails.controls.Address.dirty || orderDetails.controls.Address.touched)"
                 class="error">
-              <div *ngIf="orderDetails.controls.Address.hasError('required')" class="text-danger">Address is
+                <div *ngIf="orderDetails.controls.Address.hasError('required')" class="text-danger">Address is
                   required
-              </div>
+                </div>
               </div>
             </div>
 
             <div class="form-group">
               <label for="exampleInputSNo">S No</label>
-              <input type="Number"  formControlName="S_No" class="form-control" id="SNo" aria-describedby="SNo">
+              <input type="Number" formControlName="S_No" class="form-control" id="SNo" aria-describedby="SNo">
               <div
                 *ngIf="orderDetails.controls.S_No.invalid && (orderDetails.controls.S_No.dirty || orderDetails.controls.S_No.touched)"
                 class="error">
 
                 <div *ngIf="orderDetails.controls.S_No.hasError('pattern')" class="text-danger">S_No
                   must Be greater than 0
-                  </div>
+                </div>
 
                 <div *ngIf="orderDetails.controls.S_No.hasError('required')" class="text-danger">S_No
                   is required
                 </div>
-              </div>  
+              </div>
 
             </div>
 
             <div mdbDropdown class="dropdown">
-              <label for="cars">Select Item </label>&nbsp;
+              <label for="items">Select Item </label>&nbsp;
               <br>
-              <select name="cars" formControlName="Item" id="cars">
-                <option value="Redmi">Redmi</option>
-                <option value="Realme">Realme</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Vivo">Vivo</option>
-                <option value="Nokia">Nokia</option>
-                <option value="Oppo">Oppo</option>
+              <select class="form-control" formControlName="Item" required>
+                 <option *ngFor="let data of options">{{data}}</option>
               </select>
+              <div
+                *ngIf="orderDetails.controls.Item.invalid && (orderDetails.controls.Item.dirty || orderDetails.controls.Item.touched)"
+                class="error">
+                <div *ngIf="orderDetails.controls.Item.hasError('required')" class="text-danger"> Item is
+                  required
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="exampleInputQunatity">Quantity</label>
-              <input type="Number" formControlName="Quantity" class="form-control" id="Quanity"
-                aria-describedby="quantity" placeholder="select quantity">
+              <input type="Number" [(ngModel)]="defaultQuantity" formControlName="Quantity" class="form-control"
+                id="Quanity" aria-describedby="quantity" placeholder="select quantity">
+              <div
+                *ngIf="orderDetails.controls.Quantity.invalid && (orderDetails.controls.Quantity.dirty || orderDetails.controls.Quantity.touched)"
+                class="error">
+                <div *ngIf="orderDetails.controls.Quantity.hasError('required')" class="text-danger">Quantity is
+                  required
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="examplePrice">Price</label>
               <input type="text" formControlName="Price" class="form-control" id="price" aria-describedby="price"
                 placeholder="enter price">
-              <div *ngIf="orderDetails.controls.Price.invalid && (orderDetails.controls.Price.dirty || orderDetails.controls.Price.touched)"
+              <div
+                *ngIf="orderDetails.controls.Price.invalid && (orderDetails.controls.Price.dirty || orderDetails.controls.Price.touched)"
                 class="error">
-             <div *ngIf="orderDetails.controls.Price.hasError('required')" class="text-danger">Price is
+                <div *ngIf="orderDetails.controls.Price.hasError('required')" class="text-danger">Price is
                   required
+                </div>
               </div>
-              </div>  
             </div>
 
             <div class="form-group">
               <label for="CGST">Total</label>
-              <input type="number"  formControlName="Total" class="form-control" id="Total" aria-describedby="Total"
+              <input type="number" formControlName="Total" class="form-control" id="Total" aria-describedby="Total"
                 placeholder="Total">{{getTotal()}}
             </div>
 
             <div class="form-group">
               <label for="CGST">CGST %</label>
-              <input type="number" formControlName="CGST" class="form-control" id="CGST" aria-describedby="CGST"
+              <input type="number" [(ngModel)]="defaultCGST" formControlName="CGST" class="form-control" id="CGST" aria-describedby="CGST"
                 placeholder="CGST">
             </div>
 
             <div class="form-group">
               <label for="CGST">SGST %</label>
-              <input type="number" formControlName="SGST" class="form-control" id="SGST" aria-describedby="SGST"
+              <input type="number" [(ngModel)]="defaultSGST" formControlName="SGST" class="form-control" id="SGST" aria-describedby="SGST"
                 placeholder="SGST">
             </div>
 
@@ -203,12 +214,6 @@
         </div>
         <div class="modal-body">
           <form [formGroup]=" orderDetails ">
-
-            <div class="form-group">
-              <label for="Invoice_Number">Invoice_Number</label>
-              <input type="number" formControlName="Invoice_Number" class="form-control" id="Invoice_Number"
-                aria-describedby="Invoice_Number">
-            </div>
 
             <div class="form-group">
               <label for="Invoice_Date">Invoice_Date</label>
@@ -247,24 +252,38 @@
               <label for="Address">Address</label>
               <input type="String" formControlName="Address" class="form-control" id="Address"
                 aria-describedby="Address">
+              <div
+                *ngIf="orderDetails.controls.Address.invalid && (orderDetails.controls.Address.dirty || orderDetails.controls.Address.touched)"
+                class="error">
+                <div *ngIf="orderDetails.controls.Address.hasError('required')" class="text-danger">Address is
+                  required
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="exampleInputSNo">S No</label>
               <input type="Number" formControlName="S_No" class="form-control" id="SNo" aria-describedby="SNo">
+              <div
+                *ngIf="orderDetails.controls.S_No.invalid && (orderDetails.controls.S_No.dirty || orderDetails.controls.S_No.touched)"
+                class="error">
+
+                <div *ngIf="orderDetails.controls.S_No.hasError('pattern')" class="text-danger">S_No
+                  must Be greater than 0
+                </div>
+
+                <div *ngIf="orderDetails.controls.S_No.hasError('required')" class="text-danger">S_No
+                  is required
+                </div>
+              </div>
+
             </div>
 
             <div mdbDropdown class="dropdown">
               <label for="cars">Select Item </label>&nbsp;
-              <br>
-              <select name="cars" formControlName="Item" id="cars">
-                <option value="Redmi">Redmi</option>
-                <option value="Realme">Realme</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Vivo">Vivo</option>
-                <option value="Nokia">Nokia</option>
-                <option value="Oppo">Oppo</option>
-              </select>
+              <select class="form-control" formControlName="Item" required>
+                <option *ngFor="let data of options">{{data}}</option>
+             </select>
             </div>
             <div class="form-group">
               <label for="exampleInputQunatity">Quantity</label>
@@ -273,26 +292,40 @@
             </div>
             <div class="form-group">
               <label for="examplePrice">Price</label>
-              <input type="text" formControlName="Price" class="form-control" id="price" aria-describedby="price"
+              <input type="number" formControlName="Price" class="form-control" id="price" aria-describedby="price"
                 placeholder="enter price">
+              <div
+                *ngIf="orderDetails.controls.Price.invalid && (orderDetails.controls.Price.dirty || orderDetails.controls.Price.touched)"
+                class="error">
+                <div *ngIf="orderDetails.controls.Price.hasError('required')" class="text-danger">Price is
+                  required
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="CGST">CGST</label>
-              <input type="number" formControlName="CGST" class="form-control" id="CGST" aria-describedby="CGST"
+              <label for="CGST">Total</label>
+              <input type="number" formControlName="Total" class="form-control" id="Total" aria-describedby="Total"
+                placeholder="Total">{{getTotal()}}
+            </div>
+
+            <div class="form-group">
+              <label for="CGST">CGST %</label>
+              <input type="number"  formControlName="CGST" class="form-control" id="CGST" aria-describedby="CGST"
                 placeholder="CGST">
             </div>
 
             <div class="form-group">
-              <label for="CGST">SGST</label>
-              <input type="number" formControlName="SGST" class="form-control" id="SGST" aria-describedby="SGST"
+              <label for="CGST">SGST %</label>
+              <input type="number"  formControlName="SGST" class="form-control" id="SGST" aria-describedby="SGST"
                 placeholder="SGST">
             </div>
 
             <div class="modal-footer">
               <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" [disabled]="orderDetails.invalid" class="btn btn-primary"
-                (click)="updateOrder()">Update </button>
+              <button type="button" class="btn btn-primary" (click)="updateOrder()" [disabled]="orderDetails.invalid">Update
+              </button>
+
             </div>
           </form>
         </div>
