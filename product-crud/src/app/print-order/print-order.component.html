@@ -1,70 +1,170 @@
-<h1>order-details are : </h1>
-<table>
+<!-- <table>
         <tr>
             <th scope="col">Invoice_number</th>
             <td>:</td>
-            <td>{{product.Invoice_Number}}</td>
+            <td>{{product?.Invoice_Number}}</td>
         </tr>
         <tr>
             <th scope="col">Invoice_Date</th>
             <td>:</td>
-            <td>{{product.Invoice_Date}}</td>
+            <td>{{product?.Invoice_Date}}</td>
         </tr>
         <tr>
             <th scope="col">Received_Name</th>
             <td>:</td>
-            <td>{{product.Received_Name}}</td>
+            <td>{{product?.Received_Name}}</td>
         </tr>
         <tr>
             <th scope="col">Address</th>
             <td>:</td>
-            <td>{{product.Address}}</td>
+            <td>{{product?.Address}}</td>
         </tr>
         <tr>
             <th scope="col">S_No</th>
             <td>:</td>
-            <td>{{product.S_No}}</td>
+            <td>{{product?.S_No}}</td>
         </tr>
         <tr>
             <th scope="col">Item</th>
             <td>:</td>
-            <td>{{product.Item}}</td>
+            <td>{{product?.Item}}</td>
         </tr>
         <tr>
             <th scope="col">Quantity</th>
             <td>:</td>
-            <td>{{product.Quantity}}</td>
+            <td>{{product?.Quantity}}</td>
         </tr>
         <tr>
             <th scope="col">Price</th>
             <td>:</td>
-            <td>{{product.Price}}</td>
+            <td>{{product?.Price}}</td>
         </tr>
         <tr>
             <th scope="col">Total</th>
             <td>:</td>
-            <td>{{product.Total}}</td>
+            <td>{{product?.Total}}</td>
         </tr>
         <tr>
             <th scope="col">CGST%</th>
             <td>:</td>
-            <td>{{product.CGST}}</td>
+            <td>{{product?.CGST}}</td>
         </tr>
         <tr>
             <th scope="col">SGST%</th>
             <td>:</td>
-            <td>{{product.SGST}}</td>
+            <td>{{product?.SGST}}</td>
         </tr>
         <tr>
             <th scope="col">Total_Tax</th>
             <td>:</td>
-            <td>{{product.Total_Tax}}</td>
+            <td>{{product?.Total_Tax}}</td>
         </tr>
         <tr>
             <th scope="col">Net_Total</th>
             <td>:</td>
-            <td>{{product.Net_Total}}</td>
+            <td>{{product?.Net_Total}}</td>
         </tr>
     
     
-  </table>
+  </table> -->
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div >
+                <h2 class="col-xs-6">Invoice</h2>
+                <h3 class=" position-absolute top-0 end-0 ">Order # {{product?.Invoice_Number}}</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Billed To:</strong><br>
+                        {{product?.Received_Name}}<br>
+                        {{product?.Address}}<br>
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Shipped To:</strong><br>
+                        {{product?.Received_Name}}<br>
+                        {{product?.Address}}<br>
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 ">
+                    <address>
+                        <strong>Order Date:</strong><br>
+                        {{product?.Invoice_Date}}<br><br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>S No</strong></td>
+                                    <td><strong>Item</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                <tr>
+                                    <td>{{product?.S_No}}</td>
+                                    <td>{{product?.Item}}</td>
+                                    <td class="text-center">{{product?.Price}}</td>
+                                    <td class="text-center">{{product?.Quantity}}</td>
+                                    <td class="text-right">{{product?.Total}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>CGST%</strong></td>
+                                    <td class="thick-line text-right">{{product?.CGST}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>SGST%</strong></td>
+                                    <td class="no-line text-right">{{product?.SGST}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total_Tax</strong></td>
+                                    <td class="no-line text-right">{{product?.Total_Tax}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Net_Total</strong></td>
+                                    <td class="no-line text-right">{{product?.Net_Total}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
