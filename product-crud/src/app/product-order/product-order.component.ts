@@ -78,7 +78,7 @@ getTotal(){
       this.getAllOrders();
     },
       err => {
-        alert("something went wrong");
+        alert("something went wrong!");
 
       });
   }
